@@ -1,0 +1,11 @@
+{
+  "ANCIENTOAK-EXPANDING_FORCE.title": "ExpandingForce",
+  "ANCIENTOAK-EXPANDING_FORCE.description": "Deal {Damage:diff()} damage{PsychicTerrainAmount:cond:>0? to ALL enemies|}.",
+  "ANCIENTOAK-PSYCHIC_TERRAIN.title": "PsychicTerrain",
+  "ANCIENTOAK-PSYCHIC_TERRAIN.description": "Your Attacks that hit ALL enemies deal {PsychicTerrainPower:diff()}% additional damage.",
+  "ANCIENTOAK-HAMMER_ARM.title": "HammerArm",
+  "ANCIENTOAK-HAMMER_ARM.description": "Deal {Damage:diff()} damage.\nLose {SpeedPower:diff()} [gold]Speed[/gold].",
+  "ANCIENTOAK-TRICK_ROOM.title": "TrickRoom",
+  "ANCIENTOAK-TRICK_ROOM.description": "Invert your [gold]Speed[/gold].\nMove cards from your [gold]Draw Pile[/gold] to your [gold]Discard Pile[/gold] equal to your [gold]Speed[/gold]{InCombat: ({CalculatedCards:diff()})|}.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+  "ANCIENTOAK-TRICK_ROOM.selectionScreenPrompt": "Choose cards to Change Pile."
+}
