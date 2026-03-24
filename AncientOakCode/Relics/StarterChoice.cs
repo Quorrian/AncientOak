@@ -47,9 +47,9 @@ public class StarterChoice() : CustomRelicModel
         var randomBundles = new List<MovePack>();
         for (var i = 0; i < NumPacksSelection; ++i)
         {
-            var movePack = rewards.NextItem(movePacks);
-            if (movePack == null)
+            if (movePacks.Count == 0)
                 break;
+            var movePack = rewards.NextItem(movePacks);
             movePacks.Remove(movePack);
             randomBundles.Add(movePack);
         }
