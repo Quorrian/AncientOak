@@ -11,7 +11,7 @@ public static class PetHelper
     public static void PlayAnimation(Creature? pet, string animationName)
     {
         var creatureNode = NCombatRoom.Instance?.GetCreatureNode(pet);
-        var animationPlayer = creatureNode?.GetNode("%AnimationPlayer") as AnimationPlayer;
+        var animationPlayer = creatureNode?.GetNode("AnimationPlayer") as AnimationPlayer;
         if (animationPlayer == null || animationPlayer.IsPlaying())
             return;
         animationPlayer.Play(animationName);

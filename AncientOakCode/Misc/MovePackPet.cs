@@ -11,7 +11,7 @@ public class MovePackPet : MonsterModel
     public override int MaxInitialHp => 9999;
     public override bool IsHealthBarVisible => false;
 
-    public override string VisualsPath => "res://PokemonAncient/images/pets/Reuniclus/reuniclus.tscn";
+    public override string VisualsPath => "res://AncientOak/Scenes/Reuniclus/reuniclus.tscn";
 
     public override MonsterMoveStateMachine GenerateMoveStateMachine()
     {

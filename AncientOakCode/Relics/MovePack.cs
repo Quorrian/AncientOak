@@ -10,10 +10,7 @@ namespace AncientOak.AncientOakCode.Relics;
 
 public abstract class MovePack() : CustomRelicModel
 {
-    public static Dictionary<Type, string> PetVisualsByType { get; } = new ()
-    {
-        {typeof(ReuniclusPack), "res://PokemonAncient/images/pets/Reuniclus/reuniclus.tscn"}
-    };
+    public bool CardsAlreadyAdded { get; set; }
     
     public override RelicRarity Rarity =>
         RelicRarity.Ancient;
@@ -22,11 +19,11 @@ public abstract class MovePack() : CustomRelicModel
     public override bool AddsPet => true;
     public override bool SpawnsPets => true;
 
-    public abstract IEnumerable<CardModel> CardList { get; }
+    public abstract List<CardModel> CardList { get; }
 
     public override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new IntVar("CardCount", CardList.Count())
+        new IntVar("CardCount", CardList.Count)
     ];
     
     public override IEnumerable<IHoverTip> ExtraHoverTips
@@ -34,10 +31,11 @@ public abstract class MovePack() : CustomRelicModel
     
     public override async Task AfterObtained()
     {
+        if (CardsAlreadyAdded) return;
+        var results = new List<CardPileAddResult>();
         foreach (var card in CardList)
-        {
-            await CardPileCmd.Add(Owner.RunState.CreateCard(card, Owner), PileType.Deck);
-        }
+            results.Add(await CardPileCmd.Add(Owner.RunState.CreateCard(card, Owner), PileType.Deck));
+        CardCmd.PreviewCardPileAdd(results, 2f);
     }
     
     public override async Task BeforeCombatStart() => await SummonPet();

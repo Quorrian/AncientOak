@@ -1,6 +1,7 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Models;
@@ -20,32 +21,37 @@ public class StarterChoice() : CustomRelicModel
     // Add all move pack relics to this list
     public static IReadOnlyCollection<MovePack> MovePacks =>
     [
-        ModelDb.Relic<ReuniclusPack>(),
         ModelDb.Relic<ReuniclusPack>()
         //add more here
     ];
 
     public override async Task AfterObtained()
     {
-        var randomBundles = GeneratePokePacks(Owner);
-        var bundles = randomBundles.Select(b => b.cards).ToList();
-        var selectedBundle = await CardSelectCmd.FromChooseABundleScreen(Owner, bundles);
-        var selectedRelic = randomBundles.First(b => b.cards[0].Id == selectedBundle.First().Id).relic;
-        await RelicCmd.Obtain(selectedRelic.ToMutable(), Owner);
+        var randomPackRelics = GetRandomPackRelics(Owner);
+        var bundles = randomPackRelics
+            .Select(b => b.CardList.Select(c => Owner.RunState.CreateCard(c, Owner)).ToList())
+            .ToList();
+        var selectedBundle = (await CardSelectCmd.FromChooseABundleScreen(Owner, bundles)).ToList();
+        var selectedRelic = randomPackRelics.First(b => b.CardList[0].Id == selectedBundle[0].Id);
+        selectedRelic = (MovePack)selectedRelic.ToMutable();
+        selectedRelic.CardsAlreadyAdded = true;
+        await RelicCmd.Obtain(selectedRelic, Owner);
+        foreach (var card in selectedBundle)
+            await CardPileCmd.Add(card, PileType.Deck);
     }
 
-    private static List<(MovePack relic, IReadOnlyList<CardModel> cards)> GeneratePokePacks(Player player)
+    private static List<MovePack> GetRandomPackRelics(Player player)
     {
         var rewards = player.PlayerRng.Rewards;
         var movePacks = MovePacks.ToList();
-        var randomBundles = new List<(MovePack relic, IReadOnlyList<CardModel> cards)>();
+        var randomBundles = new List<MovePack>();
         for (var i = 0; i < NumPacksSelection; ++i)
         {
             var movePack = rewards.NextItem(movePacks);
             if (movePack == null)
                 break;
             movePacks.Remove(movePack);
-            randomBundles.Add((movePack, movePack.CardList.ToList()));
+            randomBundles.Add(movePack);
         }
         return randomBundles;
     }

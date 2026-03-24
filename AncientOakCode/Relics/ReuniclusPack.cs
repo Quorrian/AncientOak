@@ -10,7 +10,7 @@ namespace AncientOak.AncientOakCode.Relics;
 [Pool(typeof(EventRelicPool))]
 public class ReuniclusPack() : MovePack
 {
-    public override IEnumerable<CardModel> CardList =>
+    public override List<CardModel> CardList =>
     [
         ModelDb.Card<ExpandingForce>(),
         ModelDb.Card<HammerArm>(),
