@@ -12,14 +12,15 @@ public class ReuniclusPack() : MovePack
 {
     public override IEnumerable<CardModel> CardList =>
     [
-        new ExpandingForce(),
-        new HammerArm(),
-        new PsychicTerrain(),
-        new TrickRoom()
+        ModelDb.Card<ExpandingForce>(),
+        ModelDb.Card<HammerArm>(),
+        ModelDb.Card<PsychicTerrain>(),
+        ModelDb.Card<TrickRoom>(),
     ];
 
     protected override async Task SummonPet()
     {
-        await PlayerCmd.AddPet<MovePackPet<ReuniclusPack>>(Owner);
+        await PlayerCmd.AddPet<MovePackPet>(Owner);
+        // TODO try to make this update visuals for other types of pet
     }
 }

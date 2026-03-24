@@ -14,8 +14,7 @@ namespace AncientOak.AncientOakCode.Cards.Reuniclus;
 
 
 [Pool(typeof(EventCardPool))]
-public class HammerArm() : CustomCardModel(2, CardType.Attack,
-    CardRarity.Basic, TargetType.AnyEnemy)
+public class HammerArm() : CustomCardModel(2, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
 {
     public override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -26,7 +25,7 @@ public class HammerArm() : CustomCardModel(2, CardType.Attack,
     public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        PetHelper.PlayAttack<MovePackPet<ReuniclusPack>>(Owner);
+        PetHelper.PlayAttack<MovePackPet>(Owner);
         var attackCommand = DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash", "event:/sfx/byrdpip/byrdpip_attack");

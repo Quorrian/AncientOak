@@ -14,20 +14,18 @@ namespace AncientOak.AncientOakCode.Cards.Reuniclus;
 
 
 [Pool(typeof(EventCardPool))]
-public class TrickRoom() : CustomCardModel(1, CardType.Skill,
-    CardRarity.Basic, TargetType.Self)
+public class TrickRoom() : CustomCardModel(1, CardType.Skill, CardRarity.Ancient, TargetType.Self)
 {
     public override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(1),
-        new CalculatedVar("CalculatedCards").WithMultiplier((card, _) => (card?.Owner == null || !card.IsMutable ? 0 : card.Owner.Creature.GetPowerAmount<SpeedPower>()))
+        new CardsVar(1)
     ];
 
     public override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        PetHelper.PlaySkill<MovePackPet<ReuniclusPack>>(Owner);
+        PetHelper.PlaySkill<MovePackPet>(Owner);
         var speed = Owner.Creature.GetPowerAmount<SpeedPower>();
         if (speed == 0)
         {

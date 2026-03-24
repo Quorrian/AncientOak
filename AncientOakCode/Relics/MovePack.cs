@@ -36,7 +36,7 @@ public abstract class MovePack() : CustomRelicModel
     {
         foreach (var card in CardList)
         {
-            await CardPileCmd.Add(card, PileType.Deck);
+            await CardPileCmd.Add(Owner.RunState.CreateCard(card, Owner), PileType.Deck);
         }
     }
     

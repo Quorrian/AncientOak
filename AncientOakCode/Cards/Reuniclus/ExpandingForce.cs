@@ -22,14 +22,13 @@ public class ExpandingForce() : CustomCardModel(1, CardType.Attack, CardRarity.A
 
     public override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(15M, ValueProp.Move),
-        new CalculatedVar("PsychicTerrainAmount").WithMultiplier((card, _) => (card?.Owner == null || !card.IsMutable ? 0 : card.Owner.Creature.GetPowerAmount<PsychicTerrainPower>()))
+        new DamageVar(15M, ValueProp.Move)
     ];
 
     public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        PetHelper.PlayAttack<MovePackPet<ReuniclusPack>>(Owner);
+        PetHelper.PlayAttack<MovePackPet>(Owner);
         var attackCommand = DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .WithHitFx("vfx/vfx_attack_slash", "event:/sfx/byrdpip/byrdpip_attack");

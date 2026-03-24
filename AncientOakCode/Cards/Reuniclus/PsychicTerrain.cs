@@ -25,7 +25,7 @@ public class PsychicTerrain() : CustomCardModel(1, CardType.Power, CardRarity.An
 
     public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        PetHelper.PlayPower<MovePackPet<ReuniclusPack>>(Owner);
+        PetHelper.PlayPower<MovePackPet>(Owner);
         await PowerCmd.Apply<PsychicTerrainPower>(Owner.Creature, DynamicVars["PsychicTerrainPower"].BaseValue, Owner.Creature, this);
     }
 

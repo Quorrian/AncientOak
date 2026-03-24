@@ -4,15 +4,14 @@ using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 
 namespace AncientOak.AncientOakCode.Misc;
 
-public class MovePackPet<T> : MonsterModel where T : MovePack
+public class MovePackPet : MonsterModel
 {
     public const float AnimDelay = 0.8f;
     public override int MinInitialHp => 9999;
     public override int MaxInitialHp => 9999;
     public override bool IsHealthBarVisible => false;
 
-    public override string VisualsPath
-        => MovePack.PetVisualsByType.GetValueOrDefault(typeof(T), "res://PokemonAncient/images/pets/Reuniclus/reuniclus.tscn");
+    public override string VisualsPath => "res://PokemonAncient/images/pets/Reuniclus/reuniclus.tscn";
 
     public override MonsterMoveStateMachine GenerateMoveStateMachine()
     {
