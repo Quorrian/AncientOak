@@ -10,15 +10,28 @@ namespace AncientOak.AncientOakCode.Misc;
 
 public static class PetHelper
 {
+    private const string PetAnimationScene = "res://AncientOak/Scenes/poke_animator.tscn";
+    
     public static void PlayAnimation(Creature? pet, string animationName)
     {
         var creatureNode = NCombatRoom.Instance?.GetCreatureNode(pet);
-        var animationPlayer = creatureNode?.GetChildrenRecursive<AnimationPlayer>().FirstOrDefault();
-        //var animationPlayer = creatureNode?.GetNode("AnimationPlayer") as AnimationPlayer;
-        if (animationPlayer == null)
+        var petNode = creatureNode?.GetNode("MovePackPet");
+        if (petNode == null)
+        {
+            MainFile.Logger.LogMessage(LogLevel.Warn, "No MovePackPet node.", 0);
             return;
+        }
+        var animationPlayer = petNode.GetNode<AnimationPlayer>("AnimationPlayer");
+        //var animationPlayer = creatureNode?.GetChildrenRecursive<AnimationPlayer>().FirstOrDefault();
+        if (animationPlayer == null)
+        {
+            // Add animation player node
+            var animScene = ResourceLoader.Load<PackedScene>(PetAnimationScene).Instantiate();
+            //var visuals = creature.GetNode<Node2D>("Visuals");
+            petNode.AddChild(animScene);
+            animationPlayer = petNode.GetNode<AnimationPlayer>("AnimationPlayer");
+        }
         
-        MainFile.Logger.LogMessage(LogLevel.Warn, animationPlayer.GetPath().ToString(), 0);
         MainFile.Logger.LogMessage(LogLevel.Warn, string.Join(',',animationPlayer.GetAnimationList()), 0);
         if (animationPlayer.IsPlaying())
             MainFile.Logger.LogMessage(LogLevel.Warn, $"Already playing {animationPlayer.CurrentAnimation}", 0);
