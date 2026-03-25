@@ -1,7 +1,9 @@
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 
 namespace AncientOak.AncientOakCode.Misc;
@@ -11,9 +13,15 @@ public static class PetHelper
     public static void PlayAnimation(Creature? pet, string animationName)
     {
         var creatureNode = NCombatRoom.Instance?.GetCreatureNode(pet);
-        var animationPlayer = creatureNode?.GetNode("AnimationPlayer") as AnimationPlayer;
-        if (animationPlayer == null || animationPlayer.IsPlaying())
+        var animationPlayer = creatureNode?.GetChildrenRecursive<AnimationPlayer>().FirstOrDefault();
+        //var animationPlayer = creatureNode?.GetNode("AnimationPlayer") as AnimationPlayer;
+        if (animationPlayer == null)
             return;
+        
+        MainFile.Logger.LogMessage(LogLevel.Warn, animationPlayer.GetPath().ToString(), 0);
+        MainFile.Logger.LogMessage(LogLevel.Warn, string.Join(',',animationPlayer.GetAnimationList()), 0);
+        if (animationPlayer.IsPlaying())
+            MainFile.Logger.LogMessage(LogLevel.Warn, $"Already playing {animationPlayer.CurrentAnimation}", 0);
         animationPlayer.Play(animationName);
     }
 

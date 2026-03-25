@@ -3,12 +3,17 @@ using AncientOak.AncientOakCode.Powers;
 using AncientOak.AncientOakCode.Relics;
 using BaseLib.Abstracts;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Characters;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace AncientOak.AncientOakCode.Cards.Reuniclus;
@@ -27,14 +32,17 @@ public class ExpandingForce() : CustomCardModel(1, CardType.Attack, CardRarity.A
 
     public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target);
         PetHelper.PlayAttack<MovePackPet>(Owner);
-        var attackCommand = DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+        var attackCommand = DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .WithHitFx("vfx/vfx_attack_slash", "event:/sfx/byrdpip/byrdpip_attack");
-        attackCommand = HasPsychicTerrain
-            ? attackCommand.TargetingAllOpponents(CombatState)
-            : attackCommand.Targeting(cardPlay.Target);
+        if (HasPsychicTerrain)
+            attackCommand = attackCommand.TargetingAllOpponents(CombatState);
+        else
+        {
+            ArgumentNullException.ThrowIfNull(cardPlay.Target);
+            // ISSUE: reference to a compiler-generated method
+            attackCommand = attackCommand.Targeting(cardPlay.Target);
+        }
         await attackCommand.Execute(choiceContext);
     }
 

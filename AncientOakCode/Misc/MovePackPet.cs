@@ -1,4 +1,5 @@
 using AncientOak.AncientOakCode.Relics;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
 
@@ -10,6 +11,9 @@ public class MovePackPet : MonsterModel
     public override int MinInitialHp => 9999;
     public override int MaxInitialHp => 9999;
     public override bool IsHealthBarVisible => false;
+    public override LocString Title => L10NMonsterLookup(Id.Entry + SubName + ".name");
+    public string SubName { get; set; } = "";
+    
 
     public override string VisualsPath => "res://AncientOak/Scenes/Reuniclus/reuniclus.tscn";
 

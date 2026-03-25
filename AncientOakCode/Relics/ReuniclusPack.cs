@@ -20,7 +20,8 @@ public class ReuniclusPack() : MovePack
 
     protected override async Task SummonPet()
     {
-        await PlayerCmd.AddPet<MovePackPet>(Owner);
+        var creature = await PlayerCmd.AddPet<MovePackPet>(Owner);
+        if (creature.Monster is MovePackPet pet) pet.SubName = "-REUNICLUS";
         // TODO try to make this update visuals for other types of pet
     }
 }
