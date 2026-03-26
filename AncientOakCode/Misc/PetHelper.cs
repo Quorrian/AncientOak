@@ -3,39 +3,51 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 
 namespace AncientOak.AncientOakCode.Misc;
 
 public static class PetHelper
 {
-    private const string PetAnimationScene = "res://AncientOak/Scenes/poke_animator.tscn";
+    //private const string PetAnimationScene = "res://AncientOak/Scenes/poke_animator.tscn";
+
+    // public static void AddAnimationNode(Creature? pet)
+    // {
+    //     var creatureNode = NCombatRoom.Instance?.GetCreatureNode(pet);
+    //     var petNode = creatureNode?.GetNode("MovePackPet");
+    //     if (petNode is null)
+    //         return;
+    //     var animScene = ResourceLoader.Load<PackedScene>(PetAnimationScene).Instantiate();
+    //     petNode.AddChild(animScene);
+    // }
+
+    private static AnimationNodeStateMachinePlayback? GetAnimationStateMachine(Creature? pet)
+    {
+        var creatureNode = NCombatRoom.Instance?.GetCreatureNode(pet);
+        var animationTree = creatureNode?.GetNode<AnimationTree>("MovePackPet/AnimationPlayer/AnimationTree");
+        return (AnimationNodeStateMachinePlayback?)animationTree?.Get("parameters/playback");
+    }
+    
+    public static void StartIdle(Creature? pet)
+    {
+        var stateMachine = GetAnimationStateMachine(pet);
+        if (stateMachine == null)
+        {
+            MainFile.Logger.LogMessage(LogLevel.Warn, "No Animation Tree node found. Couldn't start Idle.", 0);
+            return;
+        }
+        stateMachine.Start("Idle");
+    }
     
     public static void PlayAnimation(Creature? pet, string animationName)
     {
-        var creatureNode = NCombatRoom.Instance?.GetCreatureNode(pet);
-        var petNode = creatureNode?.GetNode("MovePackPet");
-        if (petNode == null)
+        var stateMachine = GetAnimationStateMachine(pet);
+        if (stateMachine == null)
         {
-            MainFile.Logger.LogMessage(LogLevel.Warn, "No MovePackPet node.", 0);
+            MainFile.Logger.LogMessage(LogLevel.Warn, $"No Animation Tree node found. Couldn't start {animationName}.", 0);
             return;
         }
-        var animationPlayer = petNode.GetNode<AnimationPlayer>("AnimationPlayer");
-        //var animationPlayer = creatureNode?.GetChildrenRecursive<AnimationPlayer>().FirstOrDefault();
-        if (animationPlayer == null)
-        {
-            // Add animation player node
-            var animScene = ResourceLoader.Load<PackedScene>(PetAnimationScene).Instantiate();
-            //var visuals = creature.GetNode<Node2D>("Visuals");
-            petNode.AddChild(animScene);
-            animationPlayer = petNode.GetNode<AnimationPlayer>("AnimationPlayer");
-        }
-        
-        MainFile.Logger.LogMessage(LogLevel.Warn, string.Join(',',animationPlayer.GetAnimationList()), 0);
-        if (animationPlayer.IsPlaying())
-            MainFile.Logger.LogMessage(LogLevel.Warn, $"Already playing {animationPlayer.CurrentAnimation}", 0);
-        animationPlayer.Play(animationName);
+        stateMachine.Travel(animationName);
     }
 
     public static void PlayAnimation<T>(Player player, string animationName) where T : MonsterModel

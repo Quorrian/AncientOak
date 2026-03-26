@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfr236tttvm3c"]
+[gd_scene load_steps=3 format=3 uid="uid://dfr236tttvm3c"]
 
-[ext_resource type="Texture2D" uid="uid://071oxrcmupxm" path="res://AncientOak/Scenes/Reuniclus/reuniclus.png" id="2_texture"]
+[ext_resource type="PackedScene" uid="uid://cmohvoexoa3lb" path="res://AncientOak/Scenes/poke_animator.tscn" id="2_8ijm4"]
+[ext_resource type="Texture2D" uid="uid://baege7lklwa0o" path="res://AncientOak/Scenes/Reuniclus/reuniclus.png" id="2_texture"]
 
 [node name="MovePackPet" type="Node2D"]
 
@@ -29,3 +30,5 @@ position = Vector2(0, -128)
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -326)
+
+[node name="AnimationPlayer" parent="." instance=ExtResource("2_8ijm4")]
