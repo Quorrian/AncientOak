@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyftosfes38dw"]
+
+[ext_resource type="Texture2D" uid="uid://d16of7sebym5g" path="res://AncientOak/Scenes/Visuals/rotom_mow.png" id="1_dk2go"]
+
+[node name="Visuals" type="Node2D"]
+
+[node name="Offset" type="Node2D" parent="."]
+position = Vector2(0, -141)
+
+[node name="AnimationTarget" type="Node2D" parent="Offset"]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Offset/AnimationTarget"]
+scale = Vector2(0.44, 0.44)
+texture = ExtResource("1_dk2go")

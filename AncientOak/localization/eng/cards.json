@@ -7,5 +7,21 @@
   "ANCIENTOAK-HAMMER_ARM.description": "Deal {Damage:diff()} damage.\nLose {SpeedPower:diff()} [gold]Speed[/gold].",
   "ANCIENTOAK-TRICK_ROOM.title": "Trick Room",
   "ANCIENTOAK-TRICK_ROOM.description": "Invert your [gold]Speed[/gold].\nMove cards from your [gold]Draw Pile[/gold] to your [gold]Discard Pile[/gold] equal to your [gold]Speed[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
-  "ANCIENTOAK-TRICK_ROOM.selectionScreenPrompt": "Choose cards to Change Pile."
+  "ANCIENTOAK-TRICK_ROOM.selectionScreenPrompt": "Choose cards to Change Pile.",
+  "ANCIENTOAK-CHARGE.title": "Charge",
+  "ANCIENTOAK-CHARGE.description": "",
+  "ANCIENTOAK-DISCHARGE.title": "Discharge",
+  "ANCIENTOAK-DISCHARGE.description": "",
+  "ANCIENTOAK-WILL_O_WISP.title": "Will'o'Wisp",
+  "ANCIENTOAK-WILL_O_WISP.description": "",
+  "ANCIENTOAK-AIR_SLASH.title": "Air Slash",
+  "ANCIENTOAK-AIR_SLASH.description": "",
+  "ANCIENTOAK-HYDRO_PUMP.title": "Hydro Pump",
+  "ANCIENTOAK-HYDRO_PUMP.description": "",
+  "ANCIENTOAK-BLIZZARD.title": "Blizzard",
+  "ANCIENTOAK-BLIZZARD.description": "",
+  "ANCIENTOAK-OVERHEAT.title": "Overheat",
+  "ANCIENTOAK-OVERHEAT.description": "",
+  "ANCIENTOAK-LEAF_STORM.title": "Leaf Storm",
+  "ANCIENTOAK-LEAF_STORM.description": ""
 }

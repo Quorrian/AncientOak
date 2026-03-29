@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4ec0oe16jrb5"]
+
+[ext_resource type="Texture2D" uid="uid://dpee37dnxgwhh" path="res://AncientOak/Scenes/Visuals/rotom_heat.png" id="1_4n6x5"]
+
+[node name="Visuals" type="Node2D"]
+
+[node name="Offset" type="Node2D" parent="."]
+position = Vector2(0, -141)
+
+[node name="AnimationTarget" type="Node2D" parent="Offset"]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Offset/AnimationTarget"]
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("1_4n6x5")

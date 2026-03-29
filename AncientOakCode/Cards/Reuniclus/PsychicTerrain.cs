@@ -1,6 +1,5 @@
 using AncientOak.AncientOakCode.Misc;
 using AncientOak.AncientOakCode.Powers;
-using AncientOak.AncientOakCode.Relics;
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -26,8 +25,8 @@ public class PsychicTerrain() : CustomCardModel(1, CardType.Power, CardRarity.An
     public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         PetHelper.PlayPower<MovePackPet>(Owner);
-        await PowerCmd.Apply<PsychicTerrainPower>(Owner.Creature, DynamicVars["PsychicTerrainPower"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<PsychicTerrainPower>(Owner.Creature, DynamicVars[nameof(PsychicTerrainPower)].BaseValue, Owner.Creature, this);
     }
 
-    public override void OnUpgrade() => DynamicVars["PsychicTerrainPower"].UpgradeValueBy(25M);
+    public override void OnUpgrade() => DynamicVars[nameof(PsychicTerrainPower)].UpgradeValueBy(25M);
 }

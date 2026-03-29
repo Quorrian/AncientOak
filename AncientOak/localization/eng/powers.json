@@ -1,8 +1,11 @@
 {
-  "ANCIENTOAK-PSYCHIC_TERRAIN_POWER.title": "PsychicTerrain",
+  "ANCIENTOAK-PSYCHIC_TERRAIN_POWER.title": "Psychic Terrain",
   "ANCIENTOAK-PSYCHIC_TERRAIN_POWER.description": "Attacks that target ALL enemies deal 50% additional damage.",
   "ANCIENTOAK-PSYCHIC_TERRAIN_POWER.smartDescription": "Attacks that target ALL enemies deal [blue]{Amount}%[/blue] additional damage.",
-  "ANCIENTOAK-SPEED_POWER.title": "SpeedPower",
+  "ANCIENTOAK-SPEED_POWER.title": "Speed",
   "ANCIENTOAK-SPEED_POWER.description": "At the start of your turn, draw [blue]1[/blue] additional card for every [blue]2[/blue] [gold]Speed[/gold].",
-  "ANCIENTOAK-SPEED_POWER.smartDescription": "{Amount:cond:<0?Decreases|Increases} cards drawn at the start of your turn by [blue]{Amount:abs()}[/blue]."
+  "ANCIENTOAK-SPEED_POWER.smartDescription": "{Amount:cond:<0?Decreases|Increases} cards drawn at the start of your turn by [blue]{Amount:abs()}[/blue].",
+  "ANCIENTOAK-BOOST_NEXT_ATTACK_POWER.title": "Charge",
+  "ANCIENTOAK-BOOST_NEXT_ATTACK_POWER.description": "Your next Attack deals 50% additional damage.",
+  "ANCIENTOAK-BOOST_NEXT_ATTACK_POWER.smartDescription": "Your next Attack deals [blue]{Amount}%[/blue] additional damage."
 }

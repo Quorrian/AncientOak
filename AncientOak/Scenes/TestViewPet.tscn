@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8o1ov7jhvam6"]
+
+[ext_resource type="Texture2D" uid="uid://bqx3si5mcm6ps" path="res://AncientOak/Scenes/TestViewPet.png" id="1_dbpcm"]
+[ext_resource type="PackedScene" uid="uid://dfr236tttvm3c" path="res://AncientOak/Scenes/move_pack_pet.tscn" id="2_ekt6f"]
+
+[node name="TestViewPet" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-64.15225, -191.62502)
+scale = Vector2(0.76451373, 0.7645138)
+texture = ExtResource("1_dbpcm")
+
+[node name="MovePackPet" parent="." instance=ExtResource("2_ekt6f")]

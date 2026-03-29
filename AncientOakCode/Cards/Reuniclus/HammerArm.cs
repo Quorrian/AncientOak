@@ -1,6 +1,5 @@
 using AncientOak.AncientOakCode.Misc;
 using AncientOak.AncientOakCode.Powers;
-using AncientOak.AncientOakCode.Relics;
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -30,7 +29,7 @@ public class HammerArm() : CustomCardModel(2, CardType.Attack, CardRarity.Ancien
             .FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash", "event:/sfx/byrdpip/byrdpip_attack");
         await attackCommand.Execute(choiceContext);
-        await PowerCmd.Apply<SpeedPower>(Owner.Creature, -DynamicVars["SpeedPower"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<SpeedPower>(Owner.Creature, -DynamicVars[nameof(SpeedPower)].BaseValue, Owner.Creature, this);
     }
 
     public override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(5M);

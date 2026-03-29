@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck0sh2pyvokhg"]
+
+[ext_resource type="Texture2D" uid="uid://d5nf8jukt8rn" path="res://AncientOak/Scenes/Visuals/rotom.png" id="1_kgjy1"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(0, -165)
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("1_kgjy1")

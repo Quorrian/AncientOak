@@ -77,8 +77,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="*" PrivateAssets="All"/>
-        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*"/>
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="0.2.3" PrivateAssets="All" />
+        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.7" />
         <AdditionalFiles Include="AncientOak/localization/**/*.json"/>
     </ItemGroup>
 

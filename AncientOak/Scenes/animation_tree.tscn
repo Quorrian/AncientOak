@@ -1,0 +1,89 @@
+[gd_scene load_steps=21 format=3 uid="uid://r4brqwivwykn"]
+
+[ext_resource type="AnimationLibrary" uid="uid://dif5siut744yw" path="res://AncientOak/Scenes/poke_pet_anims.res" id="1_nl51i"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7tvjv"]
+animation = &"Appear"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0d6dq"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r0qd4"]
+animation = &"Appear"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fot6k"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vfwui"]
+animation = &"Power"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_55wit"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_48w3h"]
+animation = &"Skill"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gjlch"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_te5ch"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3otci"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xcxao"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fjtxj"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_af1lb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tq0fy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7hgiq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pbpy0"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vj25w"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_df0nx"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pbul4"]
+states/Appear/node = SubResource("AnimationNodeAnimation_7tvjv")
+states/Appear/position = Vector2(319, 198)
+states/Attack/node = SubResource("AnimationNodeAnimation_0d6dq")
+states/Attack/position = Vector2(586, 29)
+states/Disappear/node = SubResource("AnimationNodeAnimation_r0qd4")
+states/Disappear/position = Vector2(493, 273)
+states/Idle/node = SubResource("AnimationNodeAnimation_fot6k")
+states/Idle/position = Vector2(399, 115)
+states/Power/node = SubResource("AnimationNodeAnimation_vfwui")
+states/Power/position = Vector2(581, 100)
+states/RESET/node = SubResource("AnimationNodeAnimation_55wit")
+states/RESET/position = Vector2(733, 179)
+states/Skill/node = SubResource("AnimationNodeAnimation_48w3h")
+states/Skill/position = Vector2(581, 211)
+states/Start/position = Vector2(213, 115)
+transitions = ["RESET", "Idle", SubResource("AnimationNodeStateMachineTransition_gjlch"), "Power", "RESET", SubResource("AnimationNodeStateMachineTransition_te5ch"), "Skill", "RESET", SubResource("AnimationNodeStateMachineTransition_3otci"), "Attack", "RESET", SubResource("AnimationNodeStateMachineTransition_xcxao"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_fjtxj"), "Idle", "Power", SubResource("AnimationNodeStateMachineTransition_af1lb"), "Idle", "Skill", SubResource("AnimationNodeStateMachineTransition_tq0fy"), "Start", "Appear", SubResource("AnimationNodeStateMachineTransition_7hgiq"), "Appear", "Idle", SubResource("AnimationNodeStateMachineTransition_pbpy0"), "Idle", "Disappear", SubResource("AnimationNodeStateMachineTransition_vj25w"), "Disappear", "Appear", SubResource("AnimationNodeStateMachineTransition_df0nx")]
+
+[node name="AnimationTree" type="AnimationTree"]
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeStateMachine_pbul4")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries = {
+&"": ExtResource("1_nl51i")
+}

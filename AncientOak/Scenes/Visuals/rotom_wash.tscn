@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhibdfbv3mks6"]
+
+[ext_resource type="Texture2D" uid="uid://da83vuggd1soy" path="res://AncientOak/Scenes/Visuals/rotom_wash.png" id="1_gla8i"]
+
+[node name="Visuals" type="Node2D"]
+
+[node name="Offset" type="Node2D" parent="."]
+position = Vector2(0, -141)
+
+[node name="AnimationTarget" type="Node2D" parent="Offset"]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Offset/AnimationTarget"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_gla8i")
