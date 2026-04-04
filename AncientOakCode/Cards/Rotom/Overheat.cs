@@ -23,7 +23,7 @@ public class Overheat() : CustomCardModel(3, CardType.Attack,
 
     private int GetNumTransformedThisCombat()
     {
-        return 2;
+        return CountTransformsSubscriber.Singleton.TransformCount;
     }
 
     public override async Task OnPlay(
