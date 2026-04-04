@@ -1,3 +1,4 @@
+using AncientOak.AncientOakCode.Misc;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
@@ -5,7 +6,7 @@ using MegaCrit.Sts2.Core.Modding;
 namespace AncientOak;
 
 [ModInitializer(nameof(Initialize))]
-public partial class MainFile : Node
+public partial class AncientOakMainFile : Node
 {
     public const string ModId = "AncientOak"; //At the moment, this is used only for the Logger and harmony names.
 
@@ -15,7 +16,7 @@ public partial class MainFile : Node
     public static void Initialize()
     {
         Harmony harmony = new(ModId);
-
+        CountTransformsSubscriber.Subscribe();
         harmony.PatchAll();
     }
 }

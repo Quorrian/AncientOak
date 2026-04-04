@@ -22,7 +22,7 @@ public static class PetHelper
         var rootNode = creatureNode?.GetNode("MovePackPet");
         if (rootNode is null)
             return;
-        MainFile.Logger.LogMessage(LogLevel.Warn, "Replacing Visuals", 0);
+        AncientOakMainFile.Logger.LogMessage(LogLevel.Warn, "Replacing Visuals", 0);
         if (animate)
         {
             PlayAnimation(pet, "Disappear");
@@ -34,7 +34,7 @@ public static class PetHelper
         sprite2D.SetTexture(newTexture);
         sprite2D.Scale = new Vector2(petVisual.Scale, petVisual.Scale);
         offsetNode.Position = new Vector2(offsetNode.Position.X, petVisual.YPosition);
-        MainFile.Logger.LogMessage(LogLevel.Warn, "Replaced Visuals", 0);
+        AncientOakMainFile.Logger.LogMessage(LogLevel.Warn, "Replaced Visuals", 0);
         if (animate)
             await Cmd.CustomScaledWait(DisappearWait, DisappearWait);
     }
@@ -51,7 +51,7 @@ public static class PetHelper
         var stateMachine = GetAnimationStateMachine(pet);
         if (stateMachine == null)
         {
-            MainFile.Logger.LogMessage(LogLevel.Warn, "No Animation Tree node found. Couldn't start Idle.", 0);
+            AncientOakMainFile.Logger.LogMessage(LogLevel.Warn, "No Animation Tree node found. Couldn't start Idle.", 0);
             return;
         }
         stateMachine.Start(IdleAnimation);
@@ -62,7 +62,7 @@ public static class PetHelper
         var stateMachine = GetAnimationStateMachine(pet);
         if (stateMachine == null)
         {
-            MainFile.Logger.LogMessage(LogLevel.Warn, $"No Animation Tree node found. Couldn't start {animationName}.", 0);
+            AncientOakMainFile.Logger.LogMessage(LogLevel.Warn, $"No Animation Tree node found. Couldn't start {animationName}.", 0);
             return;
         }
         stateMachine.Travel(animationName);
