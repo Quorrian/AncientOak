@@ -13,7 +13,7 @@ namespace AncientOak.AncientOakCode.Cards.Reuniclus;
 
 
 [Pool(typeof(EventCardPool))]
-public class HammerArm() : CustomCardModel(2, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
+public class HammerArm() : CustomCardModel(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
 {
     public override IEnumerable<DynamicVar> CanonicalVars =>
     [
