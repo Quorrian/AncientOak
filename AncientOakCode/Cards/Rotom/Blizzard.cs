@@ -15,7 +15,7 @@ namespace AncientOak.AncientOakCode.Cards.Rotom;
 
 [Pool(typeof(EventCardPool))]
 public class Blizzard() : CustomCardModel(2, CardType.Attack,
-    CardRarity.Ancient, TargetType.AllEnemies)
+    CardRarity.Ancient, TargetType.AllEnemies), ICardPlayLater
 {
     private const string Frost = "Frost";
     
@@ -48,7 +48,10 @@ public class Blizzard() : CustomCardModel(2, CardType.Attack,
         
         for (var i = 0; i < DynamicVars[Frost].IntValue; ++i)
             await OrbCmd.Channel<FrostOrb>(choiceContext, Owner);
-        
+    }
+
+    public async Task AfterCardPlayedLater(PlayerChoiceContext choiceContext)
+    {
         await this.ChooseAndTransform(choiceContext, [ModelDb.Card<Overheat>(), ModelDb.Card<LeafStorm>()]);
     }
 

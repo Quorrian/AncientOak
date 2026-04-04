@@ -18,10 +18,13 @@ public class Overheat() : CustomCardModel(3, CardType.Attack,
     public override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(20M, ValueProp.Move),
-        new PowerVar<BoostNextAttackPower>(50M)
+        new PowerVar<BoostNextAttackPower>(50M),
+        new CalculationBaseVar(0M),
+        new CalculationExtraVar(1M),
+        new CalculatedVar("CalculatedHits").WithMultiplier((_, _) => GetNumTransformedThisCombat())
     ];
 
-    private int GetNumTransformedThisCombat()
+    private static int GetNumTransformedThisCombat()
     {
         return CountTransformsSubscriber.Singleton.TransformCount;
     }

@@ -30,7 +30,7 @@ public class Discharge() : CustomCardModel(2, CardType.Attack,
             .FromCard(this).TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        await PowerCmd.Apply<VulnerablePower>(CombatState.HittableEnemies, DynamicVars.Weak.BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(CombatState.HittableEnemies, DynamicVars.Weak.BaseValue, Owner.Creature, this);
     }
 
     public override void OnUpgrade()

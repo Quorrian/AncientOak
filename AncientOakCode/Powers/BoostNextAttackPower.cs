@@ -42,7 +42,7 @@ public class BoostNextAttackPower : CustomPowerModel
         var internalData = GetInternalData<Data>();
         return internalData.CommandToModify != null && cardSource != null && cardSource != internalData.CommandToModify.ModelSource || internalData.CommandToModify != null && internalData.CommandToModify.Attacker != dealer
             ? 1M
-            : Math.Min(0M, 1M + Amount / 100M);
+            : 1M + Amount / 100M;
     }
 
     public override async Task AfterAttack(AttackCommand command)

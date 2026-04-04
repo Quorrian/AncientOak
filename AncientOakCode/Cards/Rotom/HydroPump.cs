@@ -15,7 +15,7 @@ namespace AncientOak.AncientOakCode.Cards.Rotom;
 
 [Pool(typeof(EventCardPool))]
 public class HydroPump() : CustomCardModel(2, CardType.Attack,
-    CardRarity.Ancient, TargetType.AnyEnemy)
+    CardRarity.Ancient, TargetType.AnyEnemy), ICardPlayLater
 {
     public override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -48,6 +48,10 @@ public class HydroPump() : CustomCardModel(2, CardType.Attack,
             .FromCard(this).Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash", "event:/sfx/byrdpip/byrdpip_attack")
             .Execute(choiceContext);
+    }
+
+    public async Task AfterCardPlayedLater(PlayerChoiceContext choiceContext)
+    {
         await this.ChooseAndTransform(choiceContext, [ModelDb.Card<Overheat>(), ModelDb.Card<LeafStorm>()]);
     }
 

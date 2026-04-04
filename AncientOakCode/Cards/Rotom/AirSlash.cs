@@ -15,7 +15,7 @@ namespace AncientOak.AncientOakCode.Cards.Rotom;
 
 [Pool(typeof(EventCardPool))]
 public class AirSlash() : CustomCardModel(1, CardType.Attack,
-    CardRarity.Ancient, TargetType.AnyEnemy)
+    CardRarity.Ancient, TargetType.AnyEnemy), ICardPlayLater
 {
     private const string StrengthLossKey = "StrengthLoss";
     
@@ -45,8 +45,11 @@ public class AirSlash() : CustomCardModel(1, CardType.Attack,
             .FromCard(this).Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash", "event:/sfx/byrdpip/byrdpip_attack")
             .Execute(choiceContext);
-        await PowerCmd.Apply<ManglePower>(play.Target, DynamicVars[StrengthLossKey].BaseValue, Owner.Creature, this);
-        
+        await PowerCmd.Apply<EnfeeblingTouchPower>(play.Target, DynamicVars[StrengthLossKey].BaseValue, Owner.Creature, this);
+    }
+
+    public async Task AfterCardPlayedLater(PlayerChoiceContext choiceContext)
+    {
         await this.ChooseAndTransform(choiceContext, [ModelDb.Card<HydroPump>(), ModelDb.Card<Blizzard>()]);
     }
 
