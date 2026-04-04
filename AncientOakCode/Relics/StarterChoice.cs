@@ -21,7 +21,8 @@ public class StarterChoice() : CustomRelicModel
     // Add all move pack relics to this list
     public static IReadOnlyCollection<MovePack> MovePacks =>
     [
-        ModelDb.Relic<ReuniclusPack>()
+        ModelDb.Relic<ReuniclusPack>(),
+        ModelDb.Relic<RotomPack>()
         //add more here
     ];
 

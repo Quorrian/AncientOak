@@ -9,9 +9,13 @@ namespace AncientOak.AncientOakCode.Misc;
 [Pool(typeof(AncientEventModel))]
 public class ProfessorOak : CustomAncientModel
 {
-    protected override OptionPools MakeOptionPools => new OptionPools(MakePool([
-        AncientOption<StarterChoice>()
-    ]));
+    protected override OptionPools MakeOptionPools => new OptionPools(
+        [
+            AncientOption<ReuniclusPack>(),
+            AncientOption<RotomPack>()
+        ],
+        [AncientOption<StarterChoice>()]
+    );
 
     public override bool IsValidForAct(ActModel act)
     {
